@@ -20,18 +20,15 @@ df <- subset(df, select = -c(Source, Rank, Residence, Citizenship, Education,
                              Status, Self_made))
 
 #line graph
-ggplot(df, aes(x = Year, y = BillionaireData, colour = Country, 
-                         group = Country, linetype = Country)) +
-  geom_line(size = 1) +
-  #geom_point(size = 2, shape = 21)  + # Also use a point with a color fill
-  labs(title = "BillionaireData for Countries in the past 50 years", 
-       subtitle = "From 1972 to 2021", 
-       caption = "Data Source: Worldbank Development Indicators
-       https://databank.worldbank.org/reports.aspx?source=2&series=SP.POP.
-       TOTL&country=#") +
-  scale_x_discrete(breaks = seq(1970, 2025, by = 5)) +
-  ylab("BillionaireData (Millions)") +
+ggplot(df, aes(x = NetWorth, y = Age, colour = Children)) +
+  geom_point(size = 2, shape = 16)  + # Also use a point with a color fill
+  labs(title = "Net Worth vs Age for all Billionaires", 
+       subtitle = "Forbes List of Billionaires 2021", 
+       caption = "Data Source: https://www.kaggle.com/
+       datasets/alexanderbader/forbes-billionaires-2021-30",
+       x = "Net Worth") +
   theme_grey() +
+  scale_x_continuous(trans='log2') + 
   theme(plot.title = element_text(hjust = 0.5, face = "bold"),
         plot.subtitle = element_text(hjust = 0.5), 
         plot.background = element_rect(fill = "aliceblue"), 
@@ -42,4 +39,4 @@ ggplot(df, aes(x = Year, y = BillionaireData, colour = Country,
         legend.title = element_text(hjust = 0.5, face = "bold")
   )
 
-#ggsave("BillionaireData_v_Year.png", dpi = 300)
+#ggsave("NetWorth_vs_Age.png", dpi = 300)
